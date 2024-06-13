@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Model Predictions</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h2>Predict if a customer will take the plan</h2>
+        <form action="/predict" method="post">
+            <div>
+                <label for="age">Age</label>
+                <input type="text" name="age" required>
+
+                <label for="duration_of_pitch">Duration of Pitch</label>
+                <input type="text" name="duration_of_pitch" required>
+
+                <label for="monthly_income">Monthly Income</label>
+                <input type="text" name="monthly_income" required>
+
+                <label for="number_of_persons">Number of Persons</label>
+                <input type="text" name="number_of_persons" required>
+
+                <label for="preferred_service_star">Preferred Service Star</label>
+                <input type="text" name="preferred_service_star" required>
+
+                <button type="submit">Predict</button>
+            </div>
+        </form>
+        {% if prediction %}
+        <div>
+            <h3>Logistic Regression Prediction: {{ prediction['logistic_result'] }}</h3>
+            <p>Probability: {{ prediction['logistic_prob'] }}</p>
+            <h3>DNN Prediction: {{ prediction['dnn_result'] }}</h3>
+            <p>Probability: {{ prediction['dnn_prob'] }}</p>
+        </div>
+        {% endif %}
+    </div>
+</body>
+</html>
